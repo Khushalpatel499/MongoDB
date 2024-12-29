@@ -49,3 +49,61 @@
 30. now delete particular db.personal.deleteOne({name:'p'})
     if we not pass property here then it delete the first one whatever or if deleteMany and not enter the property then it will delete all
     after adding properties if it match with multiple then it delete the first match only in deleteOne.
+
+# MongoDB Compass
+
+1. press connect it will connect and we can see that 6pp and to add data we clik add data and see import or insert data. or we can use filter also here and edit here and update here.
+
+# MongoDB Mongoose
+
+1. it is nothing but an npm package which can used to connect with nodejs npm i mongoose
+
+const mongoose = require('mongoose');
+mongoose.connect("mongodb://localhost:27017/databasename",{useNewUrlParser:true,useUnifiedTopolgy:ture}).then(()=>console.log("connected to mongodb success)).catch((err)=>console.log(err));
+
+2. here we have to add data for it we have to create shcema and model. means first predefined all.
+   //schema
+   const Student = new mongoose.Schema({ name:{type:String,required:true},
+   workout:Boolean,
+   height:Number
+
+})
+//model
+const student= new mongoose.model("student",Student);
+
+//make data
+
+const ss = new student({name:"khushal",workout:true,height:6})
+
+await ss.save();//use await beacuse by save it return true or false by await we say that untill return stop the further work.
+for use await we have to call in a function
+
+const adder =async ()=>{
+const ss = new student({name:"khushal",workout:true,height:6})
+await ss.save();
+}
+
+adder();
+
+3. But it is not good way to add.
+
+   const adder =async()=>{
+   const ss = await stundent.create({name:"khushal",workout:true,height:6});
+   console.log(ss);
+   }
+
+adder();
+
+4. Now read:
+
+const adder =async()=>{
+
+const ss = await stundent.find({height:{$eq:6}})
+const ss = await stundent.find({height:{$gt:6}})
+const ss = await stundent.find({height:{$gte:6}})
+const ss = await stundent.find({height:{$lt :6}})
+const ss = await stundent.find({height:{$in:[5.6]}})
+console.log(ss);
+}
+
+adder();
